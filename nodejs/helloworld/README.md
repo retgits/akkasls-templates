@@ -29,9 +29,9 @@ All the code for the user function bits of the sample are located in `function.j
 To run your sample locally, you can run:
 
 ```
-docker build . -t {{dockerimageuser}}/helloworld
-docker run -d --name helloworld -p 8080:8080 {{dockerimageuser}}/helloworld
-docker run -d --name helloworld-proxy -p 9000:9000 --env USER_FUNCTION_HOST=<your IP address> cloudstateio/cloudstate-proxy-dev-mode:latest
+docker build . -t {{dockerimageuser}}/{{functionname}}
+docker run -d --name {{functionname}} -p 8080:8080 {{dockerimageuser}}/{{functionname}}
+docker run -d --name {{functionname}}-proxy -p 9000:9000 --env USER_FUNCTION_HOST=<your IP address> cloudstateio/cloudstate-proxy-dev-mode:latest
 ```
 
 To try out your functions, run:
