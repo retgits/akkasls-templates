@@ -29,8 +29,8 @@ All the code for the user function bits of the sample are located in `function.j
 To run your sample locally, you can run:
 
 ```
-docker build . -t <your dockerhub username>/helloworld
-docker run -d --name helloworld -p 8080:8080 <your dockerhub username>/helloworld
+docker build . -t {{dockerimageuser}}/helloworld
+docker run -d --name helloworld -p 8080:8080 {{dockerimageuser}}/helloworld
 docker run -d --name helloworld-proxy -p 9000:9000 --env USER_FUNCTION_HOST=<your IP address> cloudstateio/cloudstate-proxy-dev-mode:latest
 ```
 
@@ -49,7 +49,7 @@ curl -XGET -H "Content-type: application/json" -d '{"key":"<your name>"}' 'http:
 To deploy to Akka Serverless, you can run:
 
 ```
-docker build . -t <your dockerhub username>/helloworld
-docker push <your dockerhub username>/helloworld
-akkasls svc deploy {{functionname}}  docker.io/<your dockerhub username>/helloworld
+docker build . -t {{dockerimageuser}}/helloworld
+docker push {{dockerimageuser}}/helloworld
+akkasls svc deploy {{functionname}}  {{dockerimageuser}}/helloworld
 ```
