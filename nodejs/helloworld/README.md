@@ -49,7 +49,7 @@ curl -XGET -H "Content-type: application/json" -d '{"key":"<your name>"}' 'http:
 To deploy to Akka Serverless, you can run:
 
 ```
-docker build . -t {{dockerimageuser}}/helloworld
-docker push {{dockerimageuser}}/helloworld
-akkasls svc deploy {{functionname}}  {{dockerimageuser}}/helloworld
+docker build . -t {{dockerimageuser}}/{{functionname}}
+docker push {{dockerimageuser}}/{{functionname}}
+akkasls svc deploy {{functionname}} {{dockerimageuser}}/{{functionname}}
 ```
