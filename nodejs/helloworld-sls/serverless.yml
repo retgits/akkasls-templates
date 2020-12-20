@@ -1,0 +1,21 @@
+frameworkVersion: '2'
+
+## The name of the project on Akka Serverless you want to deploy to
+service: helloworld
+
+## The configuration for the Akka Serverless provider
+provider:
+  name: akkaserverless
+  docker:
+    imageUser: docker.io/you
+
+functions:
+  helloworld:
+    handler: dockerfile
+    context: '.'
+    tag: '1.0.0'
+    skipBuild: false
+    proxyHostPort: 9001
+
+plugins:
+  - akkasls-serverless-framework
