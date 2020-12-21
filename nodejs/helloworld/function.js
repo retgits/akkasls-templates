@@ -2,7 +2,7 @@ const crdt = require("cloudstate").crdt;
 
 const entity = new crdt.Crdt(
     "userfunction.proto",
-    "{{protopackage}}.HelloWorld",
+    "com.example.helloworld.HelloWorld",
     {}
 );
 

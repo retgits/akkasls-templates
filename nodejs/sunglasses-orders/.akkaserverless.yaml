@@ -1,7 +1,0 @@
-ASTemplateVersion: 1 ## The current template version
-Resources:
-    Docker:
-        Dockerfile: ./dockerfile
-    Function:
-        Name: {{functionname}}
-        Version: '{{functionversion}}'

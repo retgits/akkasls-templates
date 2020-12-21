@@ -3,7 +3,7 @@ syntax = "proto3";
 import "google/api/annotations.proto";
 import "cloudstate/entity_key.proto";
 
-package {{protopackage}};
+package com.example.helloworld;
 
 message UpdateRequest {
     string key = 1 [(.cloudstate.entity_key) = true];

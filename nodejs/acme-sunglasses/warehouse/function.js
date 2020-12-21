@@ -2,7 +2,7 @@ const EventSourced = require("cloudstate").EventSourced;
 
 const entity = new EventSourced(
     "userfunction.proto",
-    "{{protopackage}}.Inventory",
+    "com.acme.sunglasses.Inventory",
     {
         persistenceId: "inventory",
         snapshotEvery: 5,

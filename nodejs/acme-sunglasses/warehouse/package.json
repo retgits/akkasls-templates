@@ -1,7 +1,7 @@
 {
-    "name": "{{functionname}}",
-    "version": "{{functionversion}}",
-    "description": "A Hello World sample app",
+    "name": "acme-sunglasses-warehouse",
+    "version": "1.0.0",
+    "description": "",
     "main": "index.js",
     "author": "",
     "license": "ISC",

@@ -1,0 +1,27 @@
+frameworkVersion: '2'
+
+## These variables should be updates before running any of the serverless
+## commands. The variables are used in the rest pf the template. If you want
+## to see how they are resolved, run `serverless print`
+custom:
+  akkaServerlessProject: this-is-your-project
+  dockerUser: dockerhub-username
+  dockerTag: '1.0.0'
+
+service: ${self:custom.akkaServerlessProject}
+
+provider:
+  name: akkaserverless
+  docker:
+    imageUser: docker.io/${self:custom.dockerUser}
+
+functions:
+  helloworld:
+    handler: dockerfile
+    context: .
+    tag: ${self:custom.dockerTag}
+    skipBuild: false
+    proxyHostPort: 9001
+
+plugins:
+  - '@retgits/akkasls-serverless-framework'

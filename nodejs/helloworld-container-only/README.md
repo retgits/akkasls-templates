@@ -1,12 +1,12 @@
 # Hello World
 
-This is a sample template for Hello World - Below is a brief explanation of the files in this repository:
+This is a sample template for Hello World, using prebuilt containers - Below is a brief explanation of the files in this repository:
 
 ```
 .
 ├── package.json                <-- The dependencies and description for the Node.js project
 ├── README.md                   <-- This file
-└── serverless.yml              <-- The deployment file for the Serverless Framework
+└── serverless.yml              <-- The interface description
 ```
 
 ## Requirements
@@ -20,15 +20,16 @@ This is a sample template for Hello World - Below is a brief explanation of the 
 
 ### Local development
 
-All the code for the user function bits of the sample are located in `function.js`.
+Since you're using the prebuilt containers, there is no source code in this folder. To see the example's source code, check out [helloworld](../helloworld)
 
 To run your sample locally, you can run:
 
 ```bash
 npm install
-serverless package
 serverless local start -f helloworld
 ```
+
+The `serverless local` command will download the container from DockerHub and start a local instance, together with a proxy server.
 
 To try out your functions, run:
 
@@ -38,17 +39,4 @@ curl -XPOST -H "Content-type: application/json" -d '{"key":"<your name>", "value
 
 ## To get the value
 curl -XGET -H "Content-type: application/json" -d '{"key":"<your name>"}' 'http://localhost:9001/counter/<your name>'
-```
-
-### Deploying to Akka Serverless
-
-To deploy to Akka Serverless, you can run:
-
-```bash
-## Package and push the container
-serverless package --push
-## OR push from the CLI
-docker push <dockerhub username>/<akka serverless project>-helloworld:1.0.0
-## Deploy to Akka Serverless
-serverless asdeploy -f helloworld
 ```

@@ -1,6 +1,6 @@
 {
-    "name": "{{functionname}}",
-    "version": "{{functionversion}}",
+    "name": "acme-sunglasses-users",
+    "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "author": "",

@@ -1,7 +1,7 @@
 {
-    "name": "{{functionname}}",
-    "version": "{{functionversion}}",
-    "description": "",
+    "name": "helloworld",
+    "version": "1.0.0",
+    "description": "A Hello World sample app",
     "main": "index.js",
     "author": "",
     "license": "ISC",
@@ -12,6 +12,7 @@
         "grpc": "^1.24.4"
     },
     "devDependencies": {
+        "@retgits/akkasls-serverless-framework": "^0.1.0",
         "chai": "^4.2.0",
         "mocha": "^8.2.1"
     },
