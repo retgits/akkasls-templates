@@ -1,0 +1,4 @@
+{
+    "image": "mcr.microsoft.com/vscode/devcontainers/javascript-node",
+    "extensions": ["dbaeumer.vscode-eslint"]
+}

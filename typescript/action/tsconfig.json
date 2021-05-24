@@ -1,0 +1,30 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "es6",
+		"outDir": "app",
+		"moduleResolution": "node",
+		"lib": [
+			"es6",
+		],
+		"sourceMap": false,
+		"declaration": false,
+		"allowJs": true,
+		"checkJs": true,
+		"rootDir": "src",
+		"alwaysStrict": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitReturns": true,
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"noImplicitThis": true,
+		"strictPropertyInitialization": true,
+		"noUnusedParameters": false,
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"strict": false,
+		"noImplicitAny": false,
+		"strictBindCallApply": false,
+		"noUnusedLocals": true
+	}
+}

@@ -1,0 +1,95 @@
+/**
+ * Messages in Akka Serverless get persisted in protobuf format to
+ * save on storage space in. As a best practice you want to split
+ * the outbound facing API from the internal state representation.
+ * To get you started the fastest, we've put both in this file.
+ */
+
+/**
+ * Specify the version of the Protobuf syntax
+ */
+syntax = "proto3";
+
+/**
+  * Packages prevent name clashes between protocol messages.
+  */
+package view;
+
+/**
+  * Imports allow you to use definitions from other protobuf files. In
+  * this case:
+  * akkaserverless/annotations.proto contains definitions
+  * to work with Akka Serverless.
+  * google/api/annotations.proto contains definitions to add
+  * HTTP based endpoints
+  */
+import "akkaserverless/annotations.proto";
+import "google/api/annotations.proto";
+
+/**
+  * The HelloWorldState message is the state that is persisted
+  * for the value entity. The name of the person being
+  * greeted will be used as the entity key (unique identifier)
+  */
+message HelloWorldState {
+    string name = 1 [(akkaserverless.field).entity_key = true];
+    string message = 2;
+}
+
+/**
+  * The HelloWorldRequest is the input for the Event Sourced Entity
+  */
+message HelloWorldRequest {
+    string name = 1 [(akkaserverless.field).entity_key = true];
+    string greeting = 2;
+}
+
+/**
+  * The HelloWorldResponse is the output for the Event Sourced Entity
+  */
+message HelloWorldResponse {
+    string message = 1;
+}
+
+/**
+  * The valueEntityService shows all rpc methods that are available for this service
+  * and how they relate to both the outbound API (based on HTTP) and to your code. They
+  * are similar to the value entity example, and serve to populate the view. The main
+  * difference is that the GetGreeting is replaced with a View.
+  */ 
+service valueEntityService {
+    /**
+      * The SayHello method is exposed to the outside world over gRPC and HTTP.
+      * The HTTP option exposes a URL `/sayhello` that can be invoked by sending
+      * a POST message to that endpoint. The unique identifier, entity key, is a
+      * mandatory part of the request
+      */
+    rpc SayHello(HelloWorldRequest) returns (HelloWorldResponse) {
+        option (google.api.http) = {
+            post: "/sayhello/{name}",
+            body: "*"
+        };
+    }
+}
+
+service ViewService {
+  rpc UpdateView(HelloWorldState) returns (HelloWorldState) {
+    option (.akkaserverless.method).eventing = {
+        in: {
+            value_entity: "valueentities" // this is the entity type
+        }
+    };
+    option (.akkaserverless.method).view.update = {
+        table: "greetings"
+    };
+  }
+
+  rpc GetCompanyDetails(HelloWorldRequest) returns (stream HelloWorldState) {
+    option (.akkaserverless.method).view.query = {
+        query: "SELECT * FROM greetings WHERE name = :name"
+    };
+    option (google.api.http) = {
+        get: "/greetings/{name}"
+    };
+  }
+}

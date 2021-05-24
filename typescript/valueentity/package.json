@@ -1,0 +1,33 @@
+{
+    "name": "valueentity-starter-template",
+    "version": "1.0.0",
+    "description": "An Akka Serverless TypeScript starter template using Event Sourced Entites",
+    "main": "index.js",
+    "author": "retgits",
+    "license": "MIT",
+    "repository": {
+        "url": "https://github.com/retgits/akkasls-templates/main/tree/typescript/valueentity"
+    },
+    "dependencies": {
+        "@grpc/proto-loader": "^0.5.5",
+        "@lightbend/akkaserverless-javascript-sdk": "^0.7.0-beta.8",
+        "google-protobuf": "^3.14.0",
+        "grpc": "^1.24.4"
+    },
+    "scripts": {
+        "pretest": "compile-descriptor ./valueentity.proto",
+        "build": "compile-descriptor ./valueentity.proto && tsc",
+        "start": "node ./app/index.js",
+        "container:build": "docker build . -t as-valueentity-template:$npm_package_version",
+        "container:push": "docker push as-valueentity-template:$npm_package_version",
+        "devmode:network:create": "docker network create -d bridge akkasls",
+        "devmode:network:destroy": "docker network rm akkasls",
+        "devmode:proxy:start": "docker run --rm -it --name proxy --network akkasls -p 9000:9000 --env USER_FUNCTION_HOST=userfunction gcr.io/akkaserverless-public/akkaserverless-proxy:0.7.0-beta.8 -Dconfig.resource=dev-mode.conf -Dcloudstate.proxy.protocol-compatibility-check=false",
+        "devmode:proxy:stop": "docker stop proxy && docker rm proxy",
+        "devmode:container:start": "docker run --rm -it --name userfunction --hostname userfunction --network akkasls as-valueentity-template:$npm_package_version",
+        "devmode:container:stop": "docker stop userfunction && docker rm userfunction"
+    },
+    "devDependencies": {
+        "typescript": "^4.1.3"
+    }
+}

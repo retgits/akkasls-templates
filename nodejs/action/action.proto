@@ -1,0 +1,59 @@
+/**
+ * Messages in Akka Serverless get persisted in protobuf format to
+ * save on storage space in. As a best practice you want to split
+ * the outbound facing API from the internal state representation.
+ * To get you started the fastest, we've put both in this file.
+ */
+
+/**
+ * Specify the version of the Protobuf syntax
+ */
+syntax = "proto3";
+
+/**
+ * Packages prevent name clashes between protocol messages.
+ */
+package action;
+
+/**
+ * Imports allow you to use definitions from other protobuf files. In
+ * this case:
+ * akkaserverless/annotations.proto contains definitions
+ * to work with Akka Serverless.
+ * google/api/annotations.proto contains definitions to add
+ * HTTP based endpoints
+ */
+import "akkaserverless/annotations.proto";
+import "google/api/annotations.proto";
+
+/**
+ * The HelloWorldRequest is the input for the Action
+ */
+message HelloWorldRequest {
+    string name = 1;
+}
+
+/**
+ * The HelloWorldResponse is the output for the Action
+ */
+message HelloWorldResponse {
+    string message = 1;
+}
+
+/**
+ * The ActionService shows all rpc methods that are available for this service
+ * and how they relate to both the outbound API (based on HTTP) and to your code.
+ */ 
+service ActionService {
+    /**
+     * The SayHello method is exposed to the outside world over gRPC and HTTP.
+     * The HTTP option exposes a URL `/sayhello` that can be invoked by sending
+     * a POST message to that endpoint.
+     */
+    rpc SayHello(HelloWorldRequest) returns (HelloWorldResponse) {
+        option (google.api.http) = {
+            post: "/sayhello",
+            body: "*"
+        };
+    }
+}
