@@ -37,7 +37,7 @@ message HelloWorldState {
 }
 
 /**
-  * The HelloWorldRequest is the input for the Event Sourced Entity
+  * The HelloWorldRequest is the input for the Value Entity
   */
 message HelloWorldRequest {
     string name = 1 [(akkaserverless.field).entity_key = true];
@@ -45,7 +45,7 @@ message HelloWorldRequest {
 }
 
 /**
-  * The HelloWorldResponse is the output for the Event Sourced Entity
+  * The HelloWorldResponse is the output for the Value Entity
   */
 message HelloWorldResponse {
     string message = 1;

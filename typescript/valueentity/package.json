@@ -1,7 +1,7 @@
 {
     "name": "valueentity-starter-template",
     "version": "1.0.0",
-    "description": "An Akka Serverless TypeScript starter template using Event Sourced Entites",
+    "description": "An Akka Serverless TypeScript starter template using Value Entities",
     "main": "index.js",
     "author": "retgits",
     "license": "MIT",

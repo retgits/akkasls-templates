@@ -7,7 +7,7 @@ import as from '@lightbend/akkaserverless-javascript-sdk';
  * Create a new ValueEntity entity with parameters
  * * An array of protobuf files where the entity can find message definitions
  * * The fully qualified name of the service that provides this entities interface
- * * The entity type name for all event source entities of this type. This will be prefixed
+ * * The entity type name for all value entities of this type. This will be prefixed
  *   onto the entityId when storing the events for this entity.
  */
 const entity = new as.ValueEntity(
